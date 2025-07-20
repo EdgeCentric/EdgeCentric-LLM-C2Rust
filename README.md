@@ -19,7 +19,7 @@ source ~/miniconda3/bin/activate
 conda init --all
 ```
 ### Python Environment
-We recommend to use `conda` to quickly setup the Python environment.
+We recommend using `conda` to quickly setup the Python environment.
 ```bash
 conda env create -f environment.yml
 conda activate edge-centric
@@ -44,3 +44,27 @@ There are three directories in `data.zip`:
 To be continue
 ## Evaluation
 
+### RQ1 & RQ2
+Simple run:
+```bash
+python -m scripts.rq1
+python -m scripts.rq2
+```
+
+This will produce 1 table and 4 figures as in the paper.
+
+### RQ3
+
+There is no automation scripts to examine the functional correctness of the results.
+
+For those tested with test suites, you can test it like:
+```bash
+cd test_bench/libcsv
+cargo test
+```
+
+For those tested with example usage，you have follow the operations detailed in the paper. You can run it like:
+```bash
+cd tinyhttpd
+cargo run
+```

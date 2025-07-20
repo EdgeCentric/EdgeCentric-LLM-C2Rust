@@ -185,3 +185,4 @@ cython_debug/
 benchmark/
 test_bench/
 examples/
+results/

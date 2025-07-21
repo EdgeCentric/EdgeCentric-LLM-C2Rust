@@ -1,0 +1,21 @@
+endpoints:
+  - name: "DeepSeek"
+    api_keys:
+      - <API-KEY>
+    base_url: https://api.deepseek.com/
+    model: deepseek-chat
+  - name: "Doubao"
+    api_keys:
+      - <API-KEY>
+    base_url: "https://ark.cn-beijing.volces.com/api/v3"
+    model: doubao-seed-1-6-250615
+    qpm: 30000
+    tpm: 5000000
+  - name: "Qwen"
+    api_keys:
+      - <API-KEY>
+    base_url: https://dashscope.aliyuncs.com/compatible-mode/v1/
+    model: qwen-plus
+    qpm: 1200
+    tpm: 1000000
+

@@ -3,7 +3,7 @@ __pycache__/
 *.py[cod]
 *$py.class
 
-chernc/slicer/ql/cache/
+llm_c2rust/slicer/ql/cache/
 
 #Mac
 .DS_STORE

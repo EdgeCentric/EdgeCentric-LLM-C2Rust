@@ -2,7 +2,7 @@ import os
 from typing import Literal
 from matplotlib import pyplot as plt
 import pandas as pd
-from edge_centric.compiler.rust.error_messages import RustcErrorMessages
+from llm_c2rust.cargo.rustc_messages import RustcErrorMessages
 import re
 from collections import defaultdict
 
@@ -70,7 +70,7 @@ def to_stacked_bar(
 
 def error_kind(
     message: RustcErrorMessages, ranges: list[tuple[int, int]]
-) -> Literal["External Dependency"] | Literal["Inter-Unit"] | Literal["Intra-Unit"]:
+) -> Literal["External Crate"] | Literal["Inter-Unit"] | Literal["Intra-Unit"]:
 
     located_ranges = locate_ranges(message.all_spans, ranges)
     if len(located_ranges) > 1:
@@ -78,13 +78,13 @@ def error_kind(
     file_names = {span.file_name for span in message.all_spans}
     file_names = filter(lambda x: x != "src/lib.rs", file_names)
     if len(list(file_names)):
-        return "External Dependency"
+        return "External Crate"
     if "crate" in message.message:
-        return "External Dependency"
+        return "External Crate"
     if "failed to resolve" in message.message:
-        return "External Dependency"
+        return "External Crate"
     if "unresolved import" in message.message:
-        return "External Dependency"
+        return "External Crate"
     if re.match(r"cannot find .* in this scope", message.message):
         return "Inter-Unit"
     if re.match(r"no .* found for .* in the current scope", message.message):
@@ -109,14 +109,14 @@ def classify_result2(path: str) -> tuple[int, int, int]:
         count[kind] += 1
         message_sets[kind].add(message.message)
 
-    return count["External Dependency"], count["Inter-Unit"], count["Intra-Unit"]
+    return count["External Crate"], count["Inter-Unit"], count["Intra-Unit"]
 
 
 kind2_data = pd.DataFrame(
     index=pd.MultiIndex.from_product(
         [PROJECTS, METHODS, MODELS], names=["project", "method", "models"]
     ),
-    columns=["External Dependency", "Inter-Unit", "Intra-Unit"],
+    columns=["External Crate", "Inter-Unit", "Intra-Unit"],
 )
 
 

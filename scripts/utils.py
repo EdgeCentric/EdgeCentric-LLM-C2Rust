@@ -1,7 +1,7 @@
 import os
 import re
 import subprocess
-from edge_centric.compiler.rust.error_messages import (
+from llm_c2rust.cargo.rustc_messages import (
     CargoMessageCompilerMessage,
     CargoMessageTypeAdapter,
     RustcErrorMessages,
